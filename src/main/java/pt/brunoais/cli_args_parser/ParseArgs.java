@@ -84,7 +84,7 @@ public class ParseArgs {
 						argument = defaultArgument;
 					}
 					if(argument != null){
-						argNum = argument.parse(args, argNum);
+						argNum = argument.parse(args, argNum) - 1;
 					} else if(notFoundArgument != null){
 						notFoundArgument.c("", "", arg);
 					}

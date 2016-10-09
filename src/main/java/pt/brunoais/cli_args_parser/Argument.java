@@ -80,7 +80,6 @@ public class Argument {
 			callback.c(name, key, keyValueValue);
 		} else {
 			int getUntil = startNum + multiplicity + 1;
-			
 			for (; workingNum < getUntil; workingNum++) {
 				if(keyEqValue){
 					callback.c(name, key, keyValueValue, args[workingNum]);
@@ -89,9 +88,7 @@ public class Argument {
 				}
 			}
 		}
-		
-		return workingNum - 1;
-		
+		return workingNum;
 	}
 	
 	private void call(ValCallback callback){
