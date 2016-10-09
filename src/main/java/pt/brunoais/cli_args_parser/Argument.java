@@ -52,32 +52,6 @@ public class Argument {
 		return this;
 	}
 	
-	public void call(NoValCallback callback){
-		call((ValCallback) callback);
-	}
-	public void call(SingleValCallback callback){
-		call((ValCallback) callback);
-	}
-	public void call(DoubleValCallback callback){
-		call((ValCallback) callback);
-	}
-	public void call(TripleValCallback callback){
-		call((ValCallback) callback);
-	}
-	public void call(QuadrupleValCallback callback){
-		call((ValCallback) callback);
-	}
-	
-	private void call(ValCallback callback){
-		this.callback = callback;
-		if(nameIsPrefix){
-			registerTo.appendPrefixed(this);
-		} else if(name == null || name.isEmpty()){
-			registerTo.setDefault(this);
-		} else {
-			registerTo.appendNormal(this);
-		}
-	}
 	
 	void found(String value){
 		callback.c("", "", value);
@@ -118,4 +92,30 @@ public class Argument {
 		
 	}
 	
+	private void call(ValCallback callback){
+		this.callback = callback;
+		if(nameIsPrefix){
+			registerTo.appendPrefixed(this);
+		} else if(name == null || name.isEmpty()){
+			registerTo.setDefault(this);
+		} else {
+			registerTo.appendNormal(this);
+		}
+	}
+	
+	public void call(NoValCallback callback){
+		call((ValCallback) callback);
+	}
+	public void call(SingleValCallback callback){
+		call((ValCallback) callback);
+	}
+	public void call(DoubleValCallback callback){
+		call((ValCallback) callback);
+	}
+	public void call(TripleValCallback callback){
+		call((ValCallback) callback);
+	}
+	public void call(QuadrupleValCallback callback){
+		call((ValCallback) callback);
+	}
 }
