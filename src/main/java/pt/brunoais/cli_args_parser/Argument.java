@@ -12,7 +12,6 @@ public class Argument {
 	String name;
 	private ParseArgs registerTo;
 
-	private String key;
 	private int multiplicity;
 	private boolean nameIsPrefix;
 	private boolean keyEqValue;
@@ -24,8 +23,7 @@ public class Argument {
 		this.multiplicity = 0;
 	}
 	
-	public Argument key(String key) {
-		this.key = key;
+	public Argument prefixes() {
 		nameIsPrefix = true;
 		return this;
 	}
