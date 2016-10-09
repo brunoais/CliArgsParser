@@ -26,6 +26,7 @@ public class Argument {
 	
 	public Argument key(String key) {
 		this.key = key;
+		nameIsPrefix = true;
 		return this;
 	}
 	
@@ -35,6 +36,7 @@ public class Argument {
 	
 	public Argument keyEqualValue(){
 		keyEqValue = true;
+		nameIsPrefix = true;
 		return this;
 	}
 
