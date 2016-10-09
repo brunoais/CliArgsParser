@@ -4,7 +4,7 @@
 
   <groupId>pt.brunoais</groupId>
   <artifactId>cli-args-parser</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
 
   <name>cliArgsParser</name>
