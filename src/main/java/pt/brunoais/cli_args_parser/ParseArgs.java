@@ -73,23 +73,23 @@ public class ParseArgs {
 			while(argNum < end){
 				String arg = args[argNum];
 				
-				if(noDashIsDefaultArgument && arg.charAt(0) != '-'){
+				if(noDashIsDefaultArgument && arg.charAt(0) != '-' && defaultArgument != null){
 					defaultArgument.found(arg);
-					continue;
-				}
-				
-				Argument argument = findArgs.get(arg);
-				if(argument == null){
-					argument = findArgInArray(arg);
-				}
-				if(argument == null && !noDashIsDefaultArgument){
-					argument = defaultArgument;
-				}
-				if(argument == null){
-					notFoundArgument.c("", "", arg);
 				} else {
-					argNum = argument.parse(args, argNum);					
+					Argument argument = findArgs.get(arg);
+					if(argument == null){
+						argument = findArgInArray(arg);
+					}
+					if(argument == null && !noDashIsDefaultArgument){
+						argument = defaultArgument;
+					}
+					if(argument != null){
+						argNum = argument.parse(args, argNum);
+					} else if(notFoundArgument != null){
+						notFoundArgument.c("", "", arg);
+					}
 				}
+				argNum += 1;
 				
 			}
 		

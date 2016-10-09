@@ -88,7 +88,7 @@ public class Argument {
 			}
 		}
 		
-		return workingNum;
+		return workingNum - 1;
 		
 	}
 	
