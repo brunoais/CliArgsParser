@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.github.brunoais</groupId>
+	<groupId>com.github.brunoais</groupId>
 	<artifactId>cli-args-parser</artifactId>
 	<version>0.3.0</version>
 	<packaging>jar</packaging>
 
-	<name>pt.brunoais.CliArgsParser</name>
+	<name>com.github.brunoais.CliArgsParser</name>
 	<description>
 		This project is a feature-lean implementation of a CLI arguments parser.
 		Just start by creating an instance of ParseArgs and follow the available methods.
