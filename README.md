@@ -65,11 +65,15 @@ and follow the API until you call `.call()` which will terminate the chain and r
 
 #### Parser
 
+```java
+
 	ParseArgs parser = new ParseArgs();
 	parser.argument(...) /* ... */
 	/* ... */
 	parser.unknownArgCallback((value) -> System.out.println("Argument " + value + " is unknown"));
 	parser.parse(args);
+	
+```
 
 #### Parser methods
 	
@@ -92,46 +96,61 @@ and follow the API until you call `.call()` which will terminate the chain and r
 
 Although the order of the method calls is irrelevant, if you keep a certain order, reading the code becomes an easier.  
 My recommended order:
-
+```java
 	parser.argument("-name").keyEqualValue().spaceValue().call(...)
+```	
 	
-or  
+or
 
+```java
 	parser.argument("-name").prefixes().equalValue().spaceValue().call(...)
+```
 
 #### Examples
 
-To capture `-doodle`  
+To capture `-doodle`
 
+```java
 	parser.argument("-doodle").call(()-> System.out.println("doodleFound"))
+```
 
 To capture `--option` & `--readable-option value` 
 
+```java
 	parser.argument("--option").call(()-> System.out.println("optionFound"))
 	parser.argument("--readable-option").spaceValue().call((value)-> System.out.println(value + "Found"))
+```
 
 To capture `-O2` `-O3` `-O4`, etc...
 
+```java
 	parser.argument("-O").prefixed().call((key, value)-> 
 		System.out.println(
 			(key.equals("2") ? "Oxigen": key.equals("3") ? "Ozone" : "something")+ " Found"
 		)
 	)
+```
 
 To capture `-DsomeKey=true`
-	
+
+```java
 	parser.argument("-D").prefixes().keyEqualValue().call((key, value)-> System.out.println(key + "=" + value))
+```
 
 To capture `-DotherKey=yay Foo` (cannot be used with `-DsomeKey=true` due to the conflict in the prefix)
 
+```java
 	parser.argument("-D").prefixes().keyEqualValue().spaceValue().call((key, value, spaceValue)-> System.out.println(key + "=" + value + " " + spaceValue))
+```
 
 
 #### Default argument
 
 To capture the default argument, just call the `.argument()` method followed by the callback
 
+```java
 	parser.argument().call((value)-> System.out.println("Default arg with " + value))
+```
 
 #### Unknown argument
 
@@ -152,10 +171,12 @@ which values each variable in the callback has. Here's my naming schema (in java
 
 These are the callbacks:
 
+```java
 	() -> 
 	(sValue) ->
 	(key, eqValue) ->
 	(key, eqValue, sValue) ->
 	(name, key, eqValue, sValue) ->
+```
 
 
