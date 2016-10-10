@@ -19,15 +19,6 @@ No more requirements.
 As this project is still not in version 0.5.0, the API may change to accommodate with its issues when used in the real world
 (although I do not intent to).  
 
-## Install
-
-```xml
-<dependency>
-	<groupId>org.github.brunoais</groupId>
-	<artifactId>cli-args-parser</artifactId>
-	<version>0.3.0</version>
-</dependency>
-``` 
 
 ## Quick Start
 
@@ -48,11 +39,21 @@ public class HelloWorld {
     public static void main(String[] args) {
 		ParseArgs when = new ParseArgs();
 		when.argument("-do").spaceValue().call(this::doArgument);
-		when.argument(null).call(this::defaultArgument);
+		when.argument().call(this::defaultArgument);
 		when.parse(args);
     }
 }
 ```
+
+## Install
+
+```xml
+<dependency>
+	<groupId>org.github.brunoais</groupId>
+	<artifactId>cli-args-parser</artifactId>
+	<version>0.3.0</version>
+</dependency>
+``` 
 
 ## How to use
 
