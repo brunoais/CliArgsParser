@@ -7,6 +7,12 @@ import java.util.Map;
 
 import pt.brunoais.cli_args_parser.callbacks.ValCallback;
 
+/**
+ * Simple Arguments parser
+ * 
+ * 
+ * @author brunoais
+ */
 public class ParseArgs {
 
 	private Map<String, Argument> findArgs;
@@ -22,6 +28,13 @@ public class ParseArgs {
 		noDashIsDefaultArgument = true;
 	}
 	
+	/**
+	 * Creates a new Argument to parse the default arguments
+	 * @return A new Argument for the default arguments for configuration
+	 */
+	public Argument argument(){
+		return new Argument(null, this);
+	}
 	public Argument argument(String name){
 		return new Argument(name, this);
 	}
