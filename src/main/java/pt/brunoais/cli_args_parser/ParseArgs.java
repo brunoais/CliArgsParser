@@ -35,6 +35,13 @@ public class ParseArgs {
 	public Argument argument(){
 		return new Argument(null, this);
 	}
+	
+	/**
+	 * Creates a new Argument to parse input
+	 * Provide a null name if it is a default argument 
+	 * @param name The name of the argument
+	 * @return A new Argument for this name for configuration
+	 */
 	public Argument argument(String name){
 		return new Argument(name, this);
 	}
@@ -63,15 +70,34 @@ public class ParseArgs {
 		return prevNotFoundArgument;
 	}
 	
+	/**
+	 * Parses the args array fully
+	 * 
+	 * @param args The args array to parse
+	 */
 	public void parseArgs(String[] args){
 		parseArgs(args, 0);
 	}
-	
+	/**
+	 * Parses the args array fully from start (inclusive)
+	 *  
+	 * @param args The args array to parse
+	 * @param start The first index of args array to parse
+	 */
 	public void parseArgs(String[] args, int start){
 		parseArgs(args, start, args.length);
 	}
-	
-	public void parseArgs(String[] args, int start, int end){
+	/**
+	 * Parses the args array from start (inclusive) to end (exclusive)
+	 *  
+	 * @param args The args array to parse
+	 * @param start The first index of args array to parse
+	 * @param end The (last - 1) index of args array to parse
+	 * @throws ArrayIndexOutOfBoundsException if:
+	 * 										* start < 0 || end > args.lengh
+	 * 										* args ended too soon when trying to parse a value with spaces
+	 */
+	public void parseArgs(String[] args, int start, int end) throws ArrayIndexOutOfBoundsException{
 		
 		if(start < 0 || end > args.length){
 			if(start < 0) throw new ArrayIndexOutOfBoundsException(start);
@@ -107,8 +133,7 @@ public class ParseArgs {
 			}
 		
 		}catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("The argument" + args[argNum] + "is incompletely set.");
-			throw e;
+			throw new UnexpectedEndOfArgs("The argument" + args[argNum] + "is incompletely set by the user.", e, args[argNum]);
 		}
 	}
 	
