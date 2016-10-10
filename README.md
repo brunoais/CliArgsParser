@@ -155,9 +155,9 @@ To capture the default argument, just call the `.argument()` method followed by 
 
 #### Unknown argument
 
-If the arguments you provide do not have a name starting with '-', the library can identify arguments 
-(arguments starting with `-`) that cannot be identified. To do that, use the `.unknownArgCallback()` method on the
-parser.
+If all arguments you provide does not have a name starting without a hyphen ('-'), the library can identify arguments 
+(arguments starting with `-`) that cannot be identified. You may define a callback for such event using the method
+`.unknownArgCallback()` method on the parser instance.
 
 ### How callbacks are called
 
