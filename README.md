@@ -12,7 +12,7 @@ Feel free to provide changes to this code so it supports the above mentioned fea
 
 ## Requirements
 
-This library requires java 8. If you require one for older java versions, try Apache's [Common's CLI](https://commons.apache.org/cli/)
+This library requires java 8. If you require one for older java versions, try Apache's [Common's CLI](https://commons.apache.org/cli/)  
 No more requirements.
 
 ## Usage warning
