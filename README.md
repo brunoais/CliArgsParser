@@ -23,8 +23,8 @@ As this project is still not in version 0.5.0, the API may change to accommodate
 ## Quick Start
 
 ```java
-import pt.brunoais.cli_args_parser.ParseArgs;
-import pt.brunoais.cli_args_parser.Argument;
+import org.github.brunoais.cli_args_parser.ParseArgs;
+import org.github.brunoais.cli_args_parser.Argument;
 
 public class HelloWorld {
 	// Callback for the -do argument.

@@ -1,4 +1,4 @@
-package pt.brunoais.cli_args_parser;
+package org.github.brunoais.cli_args_parser;
 
 /**
  * This exception represents an unexpected input where the input ended too early 

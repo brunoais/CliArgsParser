@@ -1,4 +1,4 @@
-package pt.brunoais.cli_args_parser.callbacks;
+package org.github.brunoais.cli_args_parser.callbacks;
 
 @FunctionalInterface
 public interface TripleValCallback extends ValCallback{

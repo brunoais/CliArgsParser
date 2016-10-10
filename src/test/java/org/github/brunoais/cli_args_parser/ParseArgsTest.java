@@ -1,4 +1,4 @@
-package pt.brunoais.cli_args_parser;
+package org.github.brunoais.cli_args_parser;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,7 @@ import static java.util.Arrays.asList;
 
 import java.util.Iterator;
 
+import org.github.brunoais.cli_args_parser.ParseArgs;
 import org.junit.Test;
 
 public class ParseArgsTest{

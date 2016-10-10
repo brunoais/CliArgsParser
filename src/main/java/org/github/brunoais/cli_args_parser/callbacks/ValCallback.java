@@ -1,4 +1,4 @@
-package pt.brunoais.cli_args_parser.callbacks;
+package org.github.brunoais.cli_args_parser.callbacks;
 
 public interface ValCallback {
 	void c(String val1, String val2, String val3);

@@ -1,11 +1,13 @@
-package pt.brunoais.cli_args_parser;
+package org.github.brunoais.cli_args_parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import pt.brunoais.cli_args_parser.callbacks.ValCallback;
+import org.github.brunoais.cli_args_parser.callbacks.ValCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple Arguments parser
@@ -14,6 +16,8 @@ import pt.brunoais.cli_args_parser.callbacks.ValCallback;
  * @author brunoais
  */
 public class ParseArgs {
+	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
+	
 
 	private Map<String, Argument> findArgs;
 	private ArrayList<Argument> prefixedArgs;
