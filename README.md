@@ -51,7 +51,7 @@ public class HelloWorld {
 <dependency>
 	<groupId>org.github.brunoais</groupId>
 	<artifactId>cli-args-parser</artifactId>
-	<version>0.3.0</version>
+	<version>0.2.1</version>
 </dependency>
 ``` 
 
