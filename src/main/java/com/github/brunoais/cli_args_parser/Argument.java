@@ -1,11 +1,11 @@
-package org.github.brunoais.cli_args_parser;
+package com.github.brunoais.cli_args_parser;
 
-import org.github.brunoais.cli_args_parser.callbacks.DoubleValCallback;
-import org.github.brunoais.cli_args_parser.callbacks.NoValCallback;
-import org.github.brunoais.cli_args_parser.callbacks.QuadrupleValCallback;
-import org.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
-import org.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
-import org.github.brunoais.cli_args_parser.callbacks.ValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.DoubleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.NoValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.QuadrupleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
 public class Argument {
 
