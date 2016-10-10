@@ -66,6 +66,7 @@ public class ParseArgs {
 	
 	/**
 	 * Sets the callback for when an argument is included but no correspondence was found
+	 * @param notFoundArgument The callback called if an unknown argument is found 
 	 * @return the previous callback. Null otherwise
 	 */
 	public ValCallback unknownArgCallback(ValCallback notFoundArgument){
@@ -98,7 +99,7 @@ public class ParseArgs {
 	 * @param start The first index of args array to parse
 	 * @param end The (last - 1) index of args array to parse
 	 * @throws ArrayIndexOutOfBoundsException if:
-	 * 										* start < 0 || end > args.lengh
+	 * 										* start &lt; 0 || end &gt; args.lengh
 	 * 										* args ended too soon when trying to parse a value with spaces
 	 */
 	public void parseArgs(String[] args, int start, int end) throws ArrayIndexOutOfBoundsException{
