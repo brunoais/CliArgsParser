@@ -124,4 +124,18 @@ public class Argument {
 	public void call(QuadrupleValCallback callback){
 		call((ValCallback) callback);
 	}
+	
+	@Override
+	public String toString() {
+		String answer = 
+				name +
+				(nameIsPrefix? "<prefix>" : "") +
+				(eqValue? (hasKey? "<key>" : "") + "=<value>" : "");
+		
+		for(int i = 0; i < multiplicity; i++){
+			answer +=" <value>";
+		}
+		
+		return answer;
+	}
 }
