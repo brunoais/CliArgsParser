@@ -22,6 +22,8 @@ public class Argument {
 		this.name = name;
 		this.registerTo = registerTo;
 		this.multiplicity = 0;
+		this.hasKey = false;
+		this.eqValue = false;
 	}
 	
 	public Argument prefixes() {
@@ -31,12 +33,13 @@ public class Argument {
 	
 	public Argument equalValue(){
 		return keyEqualValue();
+		eqValue = true;
+		return this;
 	}
 	
 	public Argument keyEqualValue(){
-		keyEqValue = true;
-		nameIsPrefix = true;
-		return this;
+		hasKey = true;
+		return equalValue();
 	}
 
 	public Argument keySpaceValue(){
@@ -53,7 +56,6 @@ public class Argument {
 		return this;
 	}
 	
-	
 	void found(String value){
 		callback.c("", "", value);
 	}
@@ -64,10 +66,11 @@ public class Argument {
 		String key = workingArg;
 		String keyValueValue = "";
 		
-		if(nameIsPrefix){
+		if(nameIsPrefix || hasKey){
 			key = workingArg.substring(name.length());
 		}
-		if(keyEqValue){
+		
+		if(eqValue){
 			String[] key_value = key.split("=", 2);
 			key = key_value[0];
 			keyValueValue = key_value[1];
@@ -80,7 +83,7 @@ public class Argument {
 		} else {
 			int getUntil = startNum + multiplicity + 1;
 			for (; workingNum < getUntil; workingNum++) {
-				if(keyEqValue){
+				if(eqValue){
 					callback.c(name, key, keyValueValue, args[workingNum]);
 				} else {
 					callback.c(name, key, args[workingNum]);
@@ -92,7 +95,7 @@ public class Argument {
 	
 	private void call(ValCallback callback){
 		this.callback = callback;
-		if(nameIsPrefix){
+		if(nameIsPrefix || eqValue){
 			registerTo.appendPrefixed(this);
 		} else if(name == null || name.isEmpty()){
 			registerTo.setDefault(this);
