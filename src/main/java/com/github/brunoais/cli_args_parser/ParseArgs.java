@@ -146,7 +146,7 @@ public class ParseArgs {
 	private Argument findArgInArray(String arg){
 		for (Iterator<Argument> iterator = prefixedArgs.iterator(); iterator.hasNext();) {
 			Argument testingArg = iterator.next();
-			if(arg.startsWith(testingArg.name)){
+			if(arg.startsWith(testingArg.name + testingArg.searchSuffix)){
 				return testingArg;
 			}
 		}
