@@ -46,11 +46,21 @@ public class HelloWorld {
 
 ## Install
 
+Latest stable version:
 ```xml
 <dependency>
 	<groupId>com.github.brunoais</groupId>
 	<artifactId>cli-args-parser</artifactId>
 	<version>0.2.2</version>
+</dependency>
+``` 
+
+Latest "stable" master version
+```xml
+<dependency>
+	<groupId>com.github.brunoais</groupId>
+	<artifactId>cli-args-parser</artifactId>
+	<version>0.2.3-SNAPSHOT</version>
 </dependency>
 ``` 
 
