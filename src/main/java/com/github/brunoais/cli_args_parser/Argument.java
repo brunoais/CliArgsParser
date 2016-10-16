@@ -12,11 +12,8 @@ public class Argument {
 	String name;
 	private ParseArgs registerTo;
 
-	static final String KEY_VALUE_SEPARATOR = "=";
-	String searchSuffix;
-	
 	int multiplicity;
-	boolean nameIsPrefix;
+	boolean prefixed;
 	boolean hasKey;
 	boolean eqValue;
 	ValCallback callback;
@@ -27,12 +24,9 @@ public class Argument {
 		this.multiplicity = 0;
 		this.hasKey = false;
 		this.eqValue = false;
-		searchSuffix = KEY_VALUE_SEPARATOR;
 	}
 	
 	public Argument prefixes() {
-		nameIsPrefix = true;
-		searchSuffix = "";
 		return this;
 	}
 	
@@ -43,7 +37,6 @@ public class Argument {
 	
 	public Argument keyEqualValue(){
 		hasKey = true;
-		searchSuffix = "";
 		return equalValue();
 	}
 
