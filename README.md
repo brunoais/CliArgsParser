@@ -16,8 +16,7 @@ This library requires java 8. If you require one for older java versions, try Ap
 No more requirements.
 
 ## Usage warning
-As this project is still not in version 0.5.0, the API may change to accommodate with its issues when used in the real world
-(although I do not intent to).  
+This project is still in its initial stages of development, the API may change to accommodate with its issues when used in the real world (although I do not intent to).  
 
 
 ## Quick Start
