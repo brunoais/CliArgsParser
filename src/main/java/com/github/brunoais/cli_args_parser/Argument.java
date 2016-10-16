@@ -12,10 +12,11 @@ public class Argument {
 	String name;
 	private ParseArgs registerTo;
 
-	private int multiplicity;
-	private boolean nameIsPrefix;
-	private boolean keyEqValue;
-	private ValCallback callback;
+	int multiplicity;
+	boolean nameIsPrefix;
+	boolean hasKey;
+	boolean eqValue;
+	ValCallback callback;
 
 	Argument(String name, ParseArgs registerTo) {
 		this.name = name;
