@@ -151,4 +151,51 @@ public class ParseArgsTest{
 		assertFalse("The callback for '-take' argument was called only " + passedIn1[0] + " times", expected.hasNext());
 		assertTrue("The callback for default argument was called only " + passedIn2[0] + " times", passedIn2[0] == 1);
 	}
+	
+	
+	@Test
+	public void whenMixKeyEqValueAndEqValueOrderDoesNotMatter1(){
+		int[] passedIn1 = new int[1];
+		int[] passedIn2 = new int[1];
+		Iterator<String> expectedKeys = asList("Life").iterator();
+		Iterator<String> expected = asList("maybe", "may").iterator();
+		
+		ParseArgs parser = new ParseArgs();
+		parser.argument("-takeWork").equalValue().call((key, value) -> {
+			assertEquals(expected.next(), value);
+			passedIn1[0]++;
+		});
+		parser.argument("-take").keyEqualValue().call((key, value) -> {
+			assertEquals(expectedKeys.next(), key);
+			assertEquals(expected.next(), value);
+			passedIn2[0]++;
+		});
+		parser.parseArgs("-takeWork=maybe yes -takeLife=may not default".split(" "));
+		
+		assertFalse("The callback for '-take' argument was called only " + passedIn1[0] + " times", expected.hasNext());
+		assertTrue("The callback for default argument was called only " + passedIn2[0] + " times", passedIn2[0] == 1);
+	}
+	
+	@Test
+	public void whenMixKeyEqValueAndEqValueOrderDoesNotMatter2(){
+		int[] passedIn1 = new int[1];
+		int[] passedIn2 = new int[1];
+		Iterator<String> expectedKeys = asList("Life").iterator();
+		Iterator<String> expected = asList("maybe", "may").iterator();
+		
+		ParseArgs parser = new ParseArgs();
+		parser.argument("-take").keyEqualValue().call((key, value) -> {
+			assertEquals(expectedKeys.next(), key);
+			assertEquals(expected.next(), value);
+			passedIn2[0]++;
+		});
+		parser.argument("-takeWork").equalValue().call((key, value) -> {
+			assertEquals(expected.next(), value);
+			passedIn1[0]++;
+		});
+		parser.parseArgs("-takeWork=maybe yes -takeLife=may not default".split(" "));
+		
+		assertFalse("The callback for '-take' argument was called only " + passedIn1[0] + " times", expected.hasNext());
+		assertTrue("The callback for default argument was called only " + passedIn2[0] + " times", passedIn2[0] == 1);
+	}
 }
