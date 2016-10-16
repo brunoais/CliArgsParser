@@ -98,7 +98,7 @@ public class Argument {
 		return workingNum;
 	}
 	
-	private void call(ValCallback callback){
+	void call(ValCallback callback){
 		this.callback = callback;
 		if(nameIsPrefix || eqValue){
 			registerTo.appendPrefixed(this);
