@@ -19,17 +19,18 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 public class ParseArgs {
 	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
 	
-
-	private Map<String, Argument> findArgs;
+	private Map<String, Argument> keySpaceValArgs;
 	private ArrayList<Argument> prefixedArgs;
+	private ArrayList<Argument> keyValueArgs;
 	private Argument defaultArgument;
 	private ValCallback notFoundArgument;
 	
 	private boolean noDashIsDefaultArgument;
 	
 	public ParseArgs() {
-		findArgs = new HashMap<>();
+		keySpaceValArgs = new HashMap<>();
 		prefixedArgs = new ArrayList<>();
+		keyValueArgs = new ArrayList<>();
 		noDashIsDefaultArgument = true;
 	}
 	
@@ -53,12 +54,17 @@ public class ParseArgs {
 	
 	void appendNormal(Argument argument){
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
-		findArgs.put(argument.name, argument);
+		keySpaceValArgs.put(argument.name, argument);
 	}
 	
 	void appendPrefixed(Argument argument){
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		prefixedArgs.add(argument);
+	}
+	
+	void appendEqValue(Argument argument){
+		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
+		keyValueArgs.add(argument);
 	}
 
 	void setDefault(Argument argument) {
@@ -121,9 +127,12 @@ public class ParseArgs {
 				if(noDashIsDefaultArgument && arg.charAt(0) != '-' && defaultArgument != null){
 					defaultArgument.found(arg);
 				} else {
-					Argument argument = findArgs.get(arg);
+					Argument argument = keySpaceValArgs.get(arg);
 					if(argument == null){
-						argument = findArgInArray(arg);
+						argument = findArgInArray(arg, keyValueArgs);
+					}
+					if(argument == null){
+						argument = findArgInArray(arg, prefixedArgs);
 					}
 					if(argument == null && !noDashIsDefaultArgument){
 						argument = defaultArgument;
@@ -143,8 +152,8 @@ public class ParseArgs {
 		}
 	}
 	
-	private Argument findArgInArray(String arg){
-		for (Iterator<Argument> iterator = prefixedArgs.iterator(); iterator.hasNext();) {
+	static Argument findArgInArray(String arg, ArrayList<Argument> searchOn){
+		for (Iterator<Argument> iterator = searchOn.iterator(); iterator.hasNext();) {
 			Argument testingArg = iterator.next();
 			if(arg.startsWith(testingArg.name)){
 				return testingArg;

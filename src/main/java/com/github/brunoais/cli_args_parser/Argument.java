@@ -27,15 +27,18 @@ public class Argument {
 	}
 	
 	public Argument prefixes() {
+		prefixed = true;
 		return this;
 	}
 	
 	public Argument equalValue(){
+		prefixed = true;
 		eqValue = true;
 		return this;
 	}
 	
 	public Argument keyEqualValue(){
+		prefixes();
 		hasKey = true;
 		return equalValue();
 	}
@@ -64,7 +67,7 @@ public class Argument {
 		String key = workingArg;
 		String keyValueValue = "";
 		
-		if(nameIsPrefix || hasKey){
+		if(prefixed){
 			key = workingArg.substring(name.length());
 		}
 		
@@ -93,7 +96,9 @@ public class Argument {
 	
 	void call(ValCallback callback){
 		this.callback = callback;
-		if(nameIsPrefix || eqValue){
+		if(!hasKey && prefixed){
+			registerTo.appendEqValue(this);
+		} else if(prefixed){
 			registerTo.appendPrefixed(this);
 		} else if(name == null || name.isEmpty()){
 			registerTo.setDefault(this);
@@ -122,7 +127,7 @@ public class Argument {
 	public String toString() {
 		String answer = 
 				name +
-				(nameIsPrefix? "<prefix>" : "") +
+				(prefixed? "<prefix>" : "") +
 				(eqValue? (hasKey? "<key>" : "") + "=<value>" : "");
 		
 		for(int i = 0; i < multiplicity; i++){
