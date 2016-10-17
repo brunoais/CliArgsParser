@@ -16,7 +16,7 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
  * 
  * @author brunoais
  */
-public class ParseArgs implements ArgParser{
+public class ParseArgs extends ArgParser{
 	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
 	
 	private Map<String, Argument> keySpaceValArgs;
@@ -35,37 +35,10 @@ public class ParseArgs implements ArgParser{
 	}
 
 
-	public GNUPOSIXParseArgs asGNUPOSIXParser(){
-		return new GNUPOSIXArgsParser();
+	public GNUPOSIXArgsParser asGNUPOSIXParser(){
+		return new GNUPOSIXArgsParser(this);
 	}
 	
-	class GNUPOSIXArgsParser implements GNUPOSIXParseArgs{
-		
-		public GNUPOSIXArg argument() {
-			return new GNUPOSIXArgument(null, this);
-		}
-
-		public GNUPOSIXParseArgs argument(String name) {
-			
-		}
-
-		public ValCallback unknownArgCallback(ValCallback notFoundArgument) {
-			return ParseArgs.this.unknownArgCallback(notFoundArgument);
-		}
-
-		public void parseArgs(String[] args) {
-			ParseArgs.this.parseArgs(args);
-		}
-
-		public void parseArgs(String[] args, int start) {
-			ParseArgs.this.parseArgs(args, start);
-		}
-
-		public void parseArgs(String[] args, int start, int end) throws ArrayIndexOutOfBoundsException {
-			ParseArgs.this.parseArgs(args, start, end);
-		}
-		
-	}
 	
 	/**
 	 * Creates a new Argument to parse the default arguments
@@ -85,23 +58,27 @@ public class ParseArgs implements ArgParser{
 		return new Argument(name, this);
 	}
 	
-	void appendNormal(Argument argument){
+	void appendNormal(BaseArg arg){
+		// ClassCastException = Bug
+		Argument argument = (Argument) arg;
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		keySpaceValArgs.put(argument.name, argument);
 	}
 	
-	void appendPrefixed(Argument argument){
+	void appendPrefixed(BaseArg arg){
+		Argument argument = (Argument) arg;
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		prefixedArgs.add(argument);
 	}
 	
-	void appendEqValue(Argument argument){
+	void appendEqValue(BaseArg arg){
+		Argument argument = (Argument) arg;
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		keyValueArgs.add(argument);
 	}
 
-	void setDefault(Argument argument) {
-		defaultArgument = argument;
+	void setDefault(BaseArg arg) {
+		defaultArgument = (Argument) arg;
 	}
 	
 	/**
@@ -115,23 +92,6 @@ public class ParseArgs implements ArgParser{
 		return prevNotFoundArgument;
 	}
 	
-	/**
-	 * Parses the args array fully
-	 * 
-	 * @param args The args array to parse
-	 */
-	public void parseArgs(String[] args){
-		parseArgs(args, 0);
-	}
-	/**
-	 * Parses the args array fully from start (inclusive)
-	 *  
-	 * @param args The args array to parse
-	 * @param start The first index of args array to parse
-	 */
-	public void parseArgs(String[] args, int start){
-		parseArgs(args, start, args.length);
-	}
 	/**
 	 * Parses the args array from start (inclusive) to end (exclusive)
 	 *  
