@@ -9,15 +9,18 @@ import com.github.brunoais.cli_args_parser.callbacks.QuadrupleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
 
-class GNUPOSIXArgument implements GNUPOSIXArg{
+class GNUPOSIXArgument extends BaseArg{
 	
 	static final Pattern ARGUMENT_VALIDATOR = Pattern.compile("^((-[a-z0-9])|([a-z0-9])|(--[a-z][a-z-]+)|([a-z][a-z0-9-]+))$", Pattern.CASE_INSENSITIVE);
 	
-	boolean isShort;
-
-	private Argument argument;
+	boolean isShort = false;
+	boolean gaveStrAttr = false;
 	
 	GNUPOSIXArgument(String name, ArgParser registerTo) {
+		super(name, registerTo);
+		if(name == null){
+			return;
+		}
 		
 		Matcher matched = ARGUMENT_VALIDATOR.matcher(name);
 		
@@ -25,55 +28,45 @@ class GNUPOSIXArgument implements GNUPOSIXArg{
 			throw new IllegalGNUPOSIXArgument(name);
 		}
 		
-		String argument;
-		if((argument = matched.group(1)) != null){
+		if(matched.group(1) != null){
 			isShort = true;
-		} else if((argument = matched.group(2)) != null){
+		} else if(matched.group(2) != null){
 			name = "-" + name;
 			isShort = true;
-		} else if((argument = matched.group(3)) != null){
+		} else if(matched.group(3) != null){
 			isShort = false;
-		} else if((argument = matched.group(4)) != null){
+		} else if(matched.group(4) != null){
 			name = "--" + name;
 		} else {
 			throw new IllegalGNUPOSIXArgument(name);
 		}
 		
-		this.argument = new Argument(name, registerTo);
+	}
+	
+	public GNUPOSIXArgument attr(BaseArg attr){
+		super.attr(attr);
+		return this;
+	}
+	
+	public GNUPOSIXArgument attr(String attr){
+		gaveStrAttr = true;
+		super.attr(new GNUPOSIXArgument(attr, registerTo));
+		return this;
 	}
 
 	@Override
-	public GNUPOSIXArg equalValue() {
-		return argument.equalValue();
+	public GNUPOSIXArgument equalValue() {
+		if(gaveStrAttr){
+			attr.spaceValue();
+		}
+		super.equalValue();
+		return this;
 	}
 
 	@Override
-	public GNUPOSIXArg spaceValue() {
-		return argument.spaceValue();
+	public GNUPOSIXArgument spaceValue() {
+		super.spaceValue();
+		return this;
 	}
 
-	@Override
-	public void call(NoValCallback callback) {
-		argument.call(callback);
-	}
-
-	@Override
-	public void call(SingleValCallback callback) {
-		argument.call(callback);
-	}
-
-	@Override
-	public void call(DoubleValCallback callback) {
-		argument.call(callback);
-	}
-
-	@Override
-	public void call(TripleValCallback callback) {
-		argument.call(callback);
-	}
-
-	@Override
-	public void call(QuadrupleValCallback callback) {
-		argument.call(callback);
-	}
 }
