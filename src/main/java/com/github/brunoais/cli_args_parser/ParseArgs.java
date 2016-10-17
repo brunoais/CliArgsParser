@@ -16,7 +16,7 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
  * 
  * @author brunoais
  */
-public class ParseArgs {
+public class ParseArgs implements ArgParser{
 	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
 	
 	private Map<String, Argument> keySpaceValArgs;
@@ -32,6 +32,39 @@ public class ParseArgs {
 		prefixedArgs = new ArrayList<>();
 		keyValueArgs = new ArrayList<>();
 		noDashIsDefaultArgument = true;
+	}
+
+
+	public GNUPOSIXParseArgs asGNUPOSIXParser(){
+		return new GNUPOSIXArgsParser();
+	}
+	
+	class GNUPOSIXArgsParser implements GNUPOSIXParseArgs{
+		
+		public GNUPOSIXArg argument() {
+			return new GNUPOSIXArgument(null, this);
+		}
+
+		public GNUPOSIXParseArgs argument(String name) {
+			
+		}
+
+		public ValCallback unknownArgCallback(ValCallback notFoundArgument) {
+			return ParseArgs.this.unknownArgCallback(notFoundArgument);
+		}
+
+		public void parseArgs(String[] args) {
+			ParseArgs.this.parseArgs(args);
+		}
+
+		public void parseArgs(String[] args, int start) {
+			ParseArgs.this.parseArgs(args, start);
+		}
+
+		public void parseArgs(String[] args, int start, int end) throws ArrayIndexOutOfBoundsException {
+			ParseArgs.this.parseArgs(args, start, end);
+		}
+		
 	}
 	
 	/**

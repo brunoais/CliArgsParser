@@ -7,10 +7,11 @@ import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
-public class Argument {
+class Argument implements Arg {
 
 	String name;
-	private ParseArgs registerTo;
+	private ArgParser registerTo;
+	BaseArg attr;
 
 	int multiplicity;
 	boolean prefixed;
@@ -18,7 +19,7 @@ public class Argument {
 	boolean eqValue;
 	ValCallback callback;
 
-	Argument(String name, ParseArgs registerTo) {
+	Argument(String name, ArgParser registerTo) {
 		this.name = name;
 		this.registerTo = registerTo;
 		this.multiplicity = 0;
@@ -26,32 +27,43 @@ public class Argument {
 		this.eqValue = false;
 	}
 	
+	public Argument attr(BaseArg attr){
+		this.attr = attr;
+		return this;
+	}
+	
+	@Override
 	public Argument prefixes() {
 		prefixed = true;
 		return this;
 	}
 	
+	@Override
 	public Argument equalValue(){
 		prefixed = true;
 		eqValue = true;
 		return this;
 	}
 	
+	@Override
 	public Argument keyEqualValue(){
 		prefixes();
 		hasKey = true;
 		return equalValue();
 	}
 
+	@Override
 	public Argument keySpaceValue(){
 		return spaceValue();
 	}
 	
+	@Override
 	public Argument spaceValue(){
 		multiplicity = 1;
 		return this;
 	}
 	
+	@Override
 	public Argument spaceValued(int times){
 		multiplicity = times;
 		return this;
@@ -107,19 +119,39 @@ public class Argument {
 		}
 	}
 	
+	@Override
 	public void call(NoValCallback callback){
+		if(attr != null){
+			attr.call(callback);
+		}
 		call((ValCallback) callback);
 	}
+	@Override
 	public void call(SingleValCallback callback){
+		if(attr != null){
+			attr.call(callback);
+		}
 		call((ValCallback) callback);
 	}
+	@Override
 	public void call(DoubleValCallback callback){
+		if(attr != null){
+			attr.call(callback);
+		}
 		call((ValCallback) callback);
 	}
+	@Override
 	public void call(TripleValCallback callback){
+		if(attr != null){
+			attr.call(callback);
+		}
 		call((ValCallback) callback);
 	}
+	@Override
 	public void call(QuadrupleValCallback callback){
+		if(attr != null){
+			attr.call(callback);
+		}
 		call((ValCallback) callback);
 	}
 	
