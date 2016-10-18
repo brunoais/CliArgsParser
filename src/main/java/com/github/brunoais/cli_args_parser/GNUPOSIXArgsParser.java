@@ -6,7 +6,7 @@ public class GNUPOSIXArgsParser extends ArgParser{
 
 	private ArgParser parseArgs;
 
-	public GNUPOSIXArgsParser(ArgParser parseArgs) {
+	GNUPOSIXArgsParser(ArgParser parseArgs) {
 		this.parseArgs = parseArgs;
 	}
 

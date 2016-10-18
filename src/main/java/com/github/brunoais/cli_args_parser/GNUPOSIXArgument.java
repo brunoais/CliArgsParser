@@ -3,12 +3,6 @@ package com.github.brunoais.cli_args_parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.github.brunoais.cli_args_parser.callbacks.DoubleValCallback;
-import com.github.brunoais.cli_args_parser.callbacks.NoValCallback;
-import com.github.brunoais.cli_args_parser.callbacks.QuadrupleValCallback;
-import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
-import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
-
 class GNUPOSIXArgument extends BaseArg{
 	
 	static final Pattern ARGUMENT_VALIDATOR = Pattern.compile("^((-[a-z0-9])|([a-z0-9])|(--[a-z][a-z-]+)|([a-z][a-z0-9-]+))$", Pattern.CASE_INSENSITIVE);
