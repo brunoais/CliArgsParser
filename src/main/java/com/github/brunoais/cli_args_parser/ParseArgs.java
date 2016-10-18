@@ -39,6 +39,14 @@ public class ParseArgs extends ArgParser{
 		return new GNUPOSIXArgsParser(this);
 	}
 	
+	/**
+	 * Short form of {@code argument()}
+	 * Creates a new Argument to parse the default arguments
+	 * @return A new Argument for the default arguments for configuration
+	 */
+	public Argument arg(){
+		return argument();
+	}
 	
 	/**
 	 * Creates a new Argument to parse the default arguments
@@ -46,6 +54,17 @@ public class ParseArgs extends ArgParser{
 	 */
 	public Argument argument(){
 		return new Argument(null, this);
+	}
+	
+	/**
+	 * Short form of {@code argument(String)}
+	 * Creates a new Argument to parse input
+	 * Provide a null name if it is a default argument 
+	 * @param name The name of the argument
+	 * @return A new Argument for this name for configuration
+	 */
+	public Argument arg(String name){
+		return argument(name);
 	}
 	
 	/**

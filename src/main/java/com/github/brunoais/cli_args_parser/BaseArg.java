@@ -27,37 +27,75 @@ abstract class BaseArg {
 		this.eqValue = false;
 	}
 	
+	/**
+	 * Adds a shorter alternate version of this argument to this argument.
+	 * Syntactically, both are meant to be synonyms.
+	 * @param attr
+	 * @return
+	 */
 	BaseArg attr(BaseArg attr){
 		this.attr = attr;
 		return this;
 	}
 	
+	/**
+	 * Specifies the name given is a prefix for params as in:<br>
+	 * {@code <name><key>=<value>} or {@code <name><key> <value>} fashion.
+	 * @return
+	 */
 	BaseArg prefixes() {
 		prefixed = true;
 		return this;
 	}
 	
+	/**
+	 * Specifies the name given is the "key" part in a {@code <key>=<value>} as in:<br>
+	 * {@code <name>=<value>} fashion.
+	 */
 	BaseArg equalValue(){
 		prefixed = true;
 		eqValue = true;
 		return this;
 	}
 	
+	/**
+	 * Specifies the name given is the "name" part as in:<br>
+	 * {@code <name><key>=<value>} fashion.
+	 * The key difference between this method and {@link #prefixes()} is that this method implies {@link #prefixes()}
+	 * while {@link #prefixes()} does not imply the {@code =} separator.
+	 */
 	BaseArg keyEqualValue(){
 		prefixes();
 		hasKey = true;
 		return equalValue();
 	}
-
+	
+	/**
+	 * @see #spaceValue()
+	 */
 	BaseArg keySpaceValue(){
 		return spaceValue();
 	}
 	
+	/**
+	 * Specifies the name given is the "name" part as in:<br>
+	 * {@code <name> <value>} fashion. (the most common)
+	 */
 	BaseArg spaceValue(){
 		multiplicity = 1;
 		return this;
 	}
 	
+	/**
+	 * Used when there can be multiple consequent values for a "key"
+	 * E.g. With a name of "-arg" and after calling ".spaceValued(3)", the user inputs:<br>
+	 * "-arg val1 val2 val3"
+	 * 
+	 * your callback is called 3 times. The 3 times with "-arg" as the name and each different valX each time. 
+	 * 
+	 * @param times The number of times values will appear after the "key" argument.
+	 * @return this
+	 */
 	BaseArg spaceValued(int times){
 		multiplicity = times;
 		return this;
