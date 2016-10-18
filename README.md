@@ -95,9 +95,9 @@ and follow the API until you call `.call()` which will terminate the chain and r
 
 ##### Names and small descriptions
 
-* `.prefixes()` -> Specifies the name given is a prefix for params as in `-<name><key>=<value>` or `-<name><key> <value>` fashion.
-* `.equalValue()` -> alias to `.keyEqualValue()` (may change in the near future to force `-<name>=<value>`).
-* `.keyEqualValue()` -> Specifies the param is in format `-<prefix><key>=<value>`
+* `.prefixes()` -> Specifies the name given is a prefix for params as in `<name><key>=<value>` or `<name><key> <value>` fashion.
+* `.equalValue()` -> Specifies the name given is the "key" part in a `<key>=<value>` fashion.
+* `.keyEqualValue()` -> Specifies the param is in format `<prefix><key>=<value>`
 * `.keySpaceValue()` -> alias to `.spaceValue()`.
 * `.spaceValue()` -> Specifies the param is in format `<something><space><value>`
 * `.spaceValued(int)` -> Specifies the param is in format `<something>(<space><value>)*int`
