@@ -51,7 +51,7 @@ Latest stable version:
 <dependency>
 	<groupId>com.github.brunoais</groupId>
 	<artifactId>cli-args-parser</artifactId>
-	<version>0.2.2</version>
+	<version>0.3.0</version>
 </dependency>
 ``` 
 
@@ -60,7 +60,7 @@ Latest "stable" master version
 <dependency>
 	<groupId>com.github.brunoais</groupId>
 	<artifactId>cli-args-parser</artifactId>
-	<version>0.2.3-SNAPSHOT</version>
+	<version>0.3.1-SNAPSHOT</version>
 </dependency>
 ``` 
 
