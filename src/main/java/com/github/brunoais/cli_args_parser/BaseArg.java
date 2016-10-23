@@ -17,7 +17,7 @@ abstract class BaseArg {
 	boolean prefixed;
 	boolean hasKey;
 	boolean eqValue;
-	ValCallback callback;
+	Callback callback;
 
 	BaseArg(String name, ArgParser registerTo) {
 		this.name = name;
@@ -102,7 +102,7 @@ abstract class BaseArg {
 	}
 	
 	void found(String value){
-		callback.c("", "", value);
+		callback.c(name, "", "", value);
 	}
 	
 	int parse(String[] args, int startNum){
@@ -124,14 +124,14 @@ abstract class BaseArg {
 		workingNum += 1;
 		
 		if(multiplicity == 0){
-			callback.c(name, key, keyValueValue);
+			callback.c(name, key, keyValueValue, "");
 		} else {
 			int getUntil = startNum + multiplicity + 1;
 			for (; workingNum < getUntil; workingNum++) {
 				if(eqValue){
 					callback.c(name, key, keyValueValue, args[workingNum]);
 				} else {
-					callback.c(name, key, args[workingNum]);
+					callback.c(name, key, "", args[workingNum]);
 				}
 			}
 		}
@@ -139,7 +139,7 @@ abstract class BaseArg {
 	}
 	
 	void call(ValCallback callback){
-		this.callback = callback;
+		this.callback = new Callback(callback);
 		if(!hasKey && prefixed){
 			registerTo.appendEqValue(this);
 		} else if(prefixed){
@@ -194,5 +194,29 @@ abstract class BaseArg {
 		}
 		
 		return answer;
+	}
+	
+	private class Callback {
+		private ValCallback callback;
+		public Callback(ValCallback callback) {
+			this.callback = callback;
+			
+		}
+		
+		void c(String name, String key, String keyValue, String spaceValue){
+			if(callback instanceof NoValCallback){
+				((NoValCallback) callback).callback();
+			} else if(callback instanceof SingleValCallback){
+				((SingleValCallback) callback).callback(spaceValue);
+			} else if(callback instanceof DoubleValCallback){
+				((DoubleValCallback) callback).callback(key, keyValue);
+			} else if(callback instanceof TripleValCallback){
+				((TripleValCallback) callback).callback(key, keyValue, spaceValue);
+			} else if(callback instanceof QuadrupleValCallback){
+				((QuadrupleValCallback) callback).callback(name, key, keyValue, spaceValue);
+			} else {
+				throw new RuntimeException("BUG IN Callback!!!");
+			}
+		}
 	}
 }

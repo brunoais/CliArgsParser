@@ -8,6 +8,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.brunoais.cli_args_parser.callbacks.DoubleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.NoValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.QuadrupleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
+import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
 /**
@@ -23,7 +28,7 @@ public class ParseArgs extends ArgParser{
 	private ArrayList<Argument> prefixedArgs;
 	private ArrayList<Argument> keyValueArgs;
 	private Argument defaultArgument;
-	private ValCallback notFoundArgument;
+	private Callback notFoundArgument;
 	
 	private boolean noDashIsDefaultArgument;
 	
@@ -106,8 +111,8 @@ public class ParseArgs extends ArgParser{
 	 * @return the previous callback. Null otherwise
 	 */
 	public ValCallback unknownArgCallback(ValCallback notFoundArgument){
-		ValCallback prevNotFoundArgument = this.notFoundArgument;
-		this.notFoundArgument = notFoundArgument;
+		ValCallback prevNotFoundArgument = this.notFoundArgument.callback;
+		this.notFoundArgument = new Callback(notFoundArgument);
 		return prevNotFoundArgument;
 	}
 	
@@ -152,7 +157,7 @@ public class ParseArgs extends ArgParser{
 					if(argument != null){
 						argNum = argument.parse(args, argNum) - 1;
 					} else if(notFoundArgument != null){
-						notFoundArgument.c("", "", arg);
+						notFoundArgument.c("", "", "", arg);
 					}
 				}
 				argNum += 1;
@@ -174,5 +179,29 @@ public class ParseArgs extends ArgParser{
 		return null;
 	}
 	
+	
+	private class Callback {
+		private ValCallback callback;
+		public Callback(ValCallback callback) {
+			this.callback = callback;
+			
+		}
+		
+		void c(String name, String key, String keyValue, String spaceValue){
+			if(callback instanceof NoValCallback){
+				((NoValCallback) callback).callback();
+			} else if(callback instanceof SingleValCallback){
+				((SingleValCallback) callback).callback(spaceValue);
+			} else if(callback instanceof DoubleValCallback){
+				((DoubleValCallback) callback).callback(key, keyValue);
+			} else if(callback instanceof TripleValCallback){
+				((TripleValCallback) callback).callback(key, keyValue, spaceValue);
+			} else if(callback instanceof QuadrupleValCallback){
+				((QuadrupleValCallback) callback).callback(name, key, keyValue, spaceValue);
+			} else {
+				throw new RuntimeException("BUG IN Callback!!!");
+			}
+		}
+	}
 }
 	
