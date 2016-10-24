@@ -207,7 +207,7 @@ abstract class BaseArg {
 			if(callback instanceof NoValCallback){
 				((NoValCallback) callback).callback();
 			} else if(callback instanceof SingleValCallback){
-				((SingleValCallback) callback).callback(spaceValue);
+				((SingleValCallback) callback).callback(spaceValue.isEmpty()? keyValue : spaceValue);
 			} else if(callback instanceof DoubleValCallback){
 				((DoubleValCallback) callback).callback(key, keyValue);
 			} else if(callback instanceof TripleValCallback){
