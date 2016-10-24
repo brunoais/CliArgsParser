@@ -198,4 +198,21 @@ public class ParseArgsTest{
 		assertFalse("The callback for '-take' argument was called only " + passedIn1[0] + " times", expected.hasNext());
 		assertTrue("The callback for default argument was called only " + passedIn2[0] + " times", passedIn2[0] == 1);
 	}
+	
+	@Test
+	public void attrAndNormalAreEqual(){
+		int[] passedIn1 = new int[1];
+		Iterator<String> expected = asList("no", "maybe", "ok").iterator();
+		
+		ParseArgs parser = new ParseArgs();
+		
+		parser.argument("--work").attr(parser.arg("-w").spaceValue()).equalValue().call((value) -> {
+			assertEquals(expected.next(), value);
+			passedIn1[0]++;
+		});
+		parser.parseArgs("-w no --work=maybe -w ok".split(" "));
+		
+		assertFalse("The callback for '--work'+'-w' argument was called only " + passedIn1[0] + " times", expected.hasNext());
+	}
+	
 }
