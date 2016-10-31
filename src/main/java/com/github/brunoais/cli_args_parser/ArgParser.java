@@ -2,7 +2,7 @@ package com.github.brunoais.cli_args_parser;
 
 import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
-abstract class ArgParser {
+abstract class ArgParser<T> {
 
 	abstract void appendNormal(BaseArg argument);
 	abstract void appendPrefixed(BaseArg argument);
@@ -10,6 +10,21 @@ abstract class ArgParser {
 	abstract void setDefault(BaseArg argument);
 	
 	abstract ValCallback unknownArgCallback(ValCallback notFoundArgument);
+	
+	/**
+	 * Short form of {@code argument()}
+	 * Creates a new Argument to parse the default arguments
+	 * @return A new Argument for the default arguments for configuration
+	 */
+	public T arg(){
+		return argument();
+	}
+	public abstract T argument();
+	
+	public T arg(String name){
+		return argument(name);
+	}
+	public abstract T argument(String name);
 	
 	/**
 	 * Parses the args array fully

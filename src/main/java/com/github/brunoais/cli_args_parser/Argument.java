@@ -1,6 +1,6 @@
 package com.github.brunoais.cli_args_parser;
 
-public class Argument extends BaseArg {
+public class Argument extends BaseArg<Void> {
 
 	Argument(String name, ArgParser registerTo) {
 		super(name, registerTo);

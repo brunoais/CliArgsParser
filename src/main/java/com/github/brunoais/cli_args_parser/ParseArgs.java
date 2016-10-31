@@ -21,7 +21,7 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
  * 
  * @author brunoais
  */
-public class ParseArgs extends ArgParser{
+public class ParseArgs extends ArgParser<Argument>{
 	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
 	
 	private Map<String, Argument> keySpaceValArgs;

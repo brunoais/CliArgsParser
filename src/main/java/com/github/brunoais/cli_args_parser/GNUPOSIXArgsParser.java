@@ -2,7 +2,7 @@ package com.github.brunoais.cli_args_parser;
 
 import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
-public class GNUPOSIXArgsParser extends ArgParser{
+public class GNUPOSIXArgsParser extends ArgParser<GNUPOSIXArgument>{
 
 	private ArgParser parseArgs;
 
@@ -11,30 +11,11 @@ public class GNUPOSIXArgsParser extends ArgParser{
 	}
 	
 	/**
-	 * Short form of {@code argument()}
-	 * Creates a new Argument to parse the default arguments
-	 * @return A new Argument for the default arguments for configuration
-	 */
-	public GNUPOSIXArgument arg(){
-		return argument();
-	}
-	/**
 	 * Creates a new Argument to parse the default arguments
 	 * @return A new Argument for the default arguments for configuration
 	 */
 	public GNUPOSIXArgument argument() {
 		return new GNUPOSIXArgument(null, this);
-	}
-
-	/**
-	 * Short form of {@code argument(String)}
-	 * Creates a new Argument to parse input
-	 * Provide a null name if it is a default argument 
-	 * @param name The name of the argument
-	 * @return A new Argument for this name for configuration
-	 */
-	public GNUPOSIXArgument arg(String name){
-		return argument(name);
 	}
 
 	/**

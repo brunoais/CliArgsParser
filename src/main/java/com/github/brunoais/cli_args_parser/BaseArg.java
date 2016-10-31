@@ -7,7 +7,7 @@ import com.github.brunoais.cli_args_parser.callbacks.SingleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.TripleValCallback;
 import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
-abstract class BaseArg {
+abstract class BaseArg<CallReturnType> {
 
 	String name;
 	ArgParser registerTo;
@@ -138,7 +138,7 @@ abstract class BaseArg {
 		return workingNum;
 	}
 	
-	void call(ValCallback callback){
+	CallReturnType call(ValCallback callback){
 		this.callback = new Callback(callback);
 		if(!hasKey && prefixed){
 			registerTo.appendEqValue(this);
@@ -149,37 +149,38 @@ abstract class BaseArg {
 		} else {
 			registerTo.appendNormal(this);
 		}
+		return null;
 	}
 	
-	public void call(NoValCallback callback){
+	public CallReturnType call(NoValCallback callback){
 		if(attr != null){
 			attr.call(callback);
 		}
-		call((ValCallback) callback);
+		return call((ValCallback) callback);
 	}
-	public void call(SingleValCallback callback){
+	public CallReturnType call(SingleValCallback callback){
 		if(attr != null){
 			attr.call(callback);
 		}
-		call((ValCallback) callback);
+		return call((ValCallback) callback);
 	}
-	public void call(DoubleValCallback callback){
+	public CallReturnType call(DoubleValCallback callback){
 		if(attr != null){
 			attr.call(callback);
 		}
-		call((ValCallback) callback);
+		return call((ValCallback) callback);
 	}
-	public void call(TripleValCallback callback){
+	public CallReturnType call(TripleValCallback callback){
 		if(attr != null){
 			attr.call(callback);
 		}
-		call((ValCallback) callback);
+		return call((ValCallback) callback);
 	}
-	public void call(QuadrupleValCallback callback){
+	public CallReturnType call(QuadrupleValCallback callback){
 		if(attr != null){
 			attr.call(callback);
 		}
-		call((ValCallback) callback);
+		return call((ValCallback) callback);
 	}
 	
 	@Override
