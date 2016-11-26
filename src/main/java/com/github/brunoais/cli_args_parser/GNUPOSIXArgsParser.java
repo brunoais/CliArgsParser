@@ -4,7 +4,7 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
 public class GNUPOSIXArgsParser extends ArgParser<GNUPOSIXArgument>{
 
-	private ArgParser parseArgs;
+	ArgParser<GNUPOSIXArgument> parseArgs;
 
 	GNUPOSIXArgsParser(ArgParser parseArgs) {
 		this.parseArgs = parseArgs;

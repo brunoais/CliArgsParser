@@ -24,11 +24,11 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 public class ParseArgs extends ArgParser<Argument>{
 	static final Logger LOG = LoggerFactory.getLogger(ParseArgs.class);
 	
-	private Map<String, Argument> keySpaceValArgs;
-	private ArrayList<Argument> prefixedArgs;
-	private ArrayList<Argument> keyValueArgs;
-	private Argument defaultArgument;
-	private Callback notFoundArgument;
+	Map<String, Argument> keySpaceValArgs;
+	ArrayList<Argument> prefixedArgs;
+	ArrayList<Argument> keyValueArgs;
+	Argument defaultArgument;
+	Callback notFoundArgument;
 	
 	private boolean noDashIsDefaultArgument;
 	
