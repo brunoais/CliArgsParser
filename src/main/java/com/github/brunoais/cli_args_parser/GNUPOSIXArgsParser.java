@@ -50,19 +50,19 @@ public class GNUPOSIXArgsParser extends ArgParser<GNUPOSIXArgument>{
 	}
 
 	@Override
-	void appendNormal(BaseArg argument) {
+	void appendNormal(GNUPOSIXArgument argument) {
 		parseArgs.appendNormal(argument);
 	}
 	@Override
-	void appendPrefixed(BaseArg argument) {
+	void appendPrefixed(GNUPOSIXArgument argument) {
 		parseArgs.appendPrefixed(argument);
 	}
 	@Override
-	void appendEqValue(BaseArg argument) {
+	void appendEqValue(GNUPOSIXArgument argument) {
 		parseArgs.appendEqValue(argument);
 	}
 	@Override
-	void setDefault(BaseArg argument) {
+	void setDefault(GNUPOSIXArgument argument) {
 		parseArgs.setDefault(argument);
 	}
 

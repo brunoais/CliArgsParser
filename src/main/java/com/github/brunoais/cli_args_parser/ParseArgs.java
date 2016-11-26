@@ -82,27 +82,24 @@ public class ParseArgs extends ArgParser<Argument>{
 		return new Argument(name, this);
 	}
 	
-	void appendNormal(BaseArg arg){
+	void appendNormal(Argument argument){
 		// ClassCastException = Bug
-		Argument argument = (Argument) arg;
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		keySpaceValArgs.put(argument.name, argument);
 	}
 	
-	void appendPrefixed(BaseArg arg){
-		Argument argument = (Argument) arg;
+	void appendPrefixed(Argument argument){
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		prefixedArgs.add(argument);
 	}
 	
-	void appendEqValue(BaseArg arg){
-		Argument argument = (Argument) arg;
+	void appendEqValue(Argument argument){
 		noDashIsDefaultArgument = noDashIsDefaultArgument && argument.name.charAt(0) == '-';
 		keyValueArgs.add(argument);
 	}
 
-	void setDefault(BaseArg arg) {
-		defaultArgument = (Argument) arg;
+	void setDefault(Argument arg) {
+		defaultArgument = arg;
 	}
 	
 	/**

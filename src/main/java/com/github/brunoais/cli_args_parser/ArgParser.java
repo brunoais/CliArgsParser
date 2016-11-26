@@ -4,10 +4,10 @@ import com.github.brunoais.cli_args_parser.callbacks.ValCallback;
 
 abstract class ArgParser<T> {
 
-	abstract void appendNormal(BaseArg argument);
-	abstract void appendPrefixed(BaseArg argument);
-	abstract void appendEqValue(BaseArg argument);
-	abstract void setDefault(BaseArg argument);
+	abstract void appendNormal(T argument);
+	abstract void appendPrefixed(T argument);
+	abstract void appendEqValue(T argument);
+	abstract void setDefault(T argument);
 	
 	abstract ValCallback unknownArgCallback(ValCallback notFoundArgument);
 	
