@@ -6,8 +6,9 @@ public class GNUPOSIXArgsParser extends ArgParser<GNUPOSIXArgument>{
 
 	ArgParser<GNUPOSIXArgument> parseArgs;
 
-	GNUPOSIXArgsParser(ArgParser parseArgs) {
-		this.parseArgs = parseArgs;
+	@SuppressWarnings("unchecked")
+	GNUPOSIXArgsParser(ArgParser<?> parseArgs) {
+		this.parseArgs = (ArgParser<GNUPOSIXArgument>) parseArgs;
 	}
 	
 	/**
